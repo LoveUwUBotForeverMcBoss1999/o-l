@@ -1,432 +1,666 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Countdown for O/Ls</title>
-    <meta
-        name="description"
-        content="A real-time countdown to December 6th, 23:59:59."
-    >
+```
+<title>Countdown for O/Ls</title>
 
-    <!-- Open Graph / Social Preview -->
-    <meta property="og:title" content="Countdown for O/Ls">
-    <meta
-        property="og:description"
-        content="Counting down to December 6th, 23:59:59."
-    >
-    <meta property="og:url" content="https://ol.mcboss.top">
-    <meta property="og:type" content="website">
+<!-- Meta Preview -->
+<meta
+    name="description"
+    content="Counting down to December 6th, 2026 — Months, Days and Hours remaining."
+>
 
-    <!-- Twitter / X Preview -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Countdown for O/Ls">
-    <meta
-        name="twitter:description"
-        content="Counting down to December 6th, 23:59:59."
-    >
+<meta property="og:title" content="Countdown for O/Ls">
+<meta
+    property="og:description"
+    content="Counting down to December 6th, 2026 — Months, Days and Hours remaining."
+>
+<meta property="og:url" content="https://ol.mcboss.top">
+<meta property="og:type" content="website">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Countdown for O/Ls">
+<meta
+    name="twitter:description"
+    content="Counting down to December 6th, 2026 — Months, Days and Hours remaining."
+>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        font-family:
+            Inter,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif;
+
+        color: white;
+        overflow: hidden;
+
+        background:
+            radial-gradient(
+                circle at 20% 20%,
+                rgba(100, 80, 255, 0.35),
+                transparent 35%
+            ),
+            radial-gradient(
+                circle at 80% 80%,
+                rgba(0, 220, 255, 0.25),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                #060711 0%,
+                #10132b 45%,
+                #05060d 100%
+            );
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: -50%;
+        pointer-events: none;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.045),
+                transparent 40%
+            );
+
+        animation: ambient 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambient {
+        from {
+            transform: translate(-3%, -2%) scale(1);
         }
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
+        to {
+            transform: translate(3%, 2%) scale(1.08);
         }
+    }
 
-        body {
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Arial,
-                sans-serif;
+    .page {
+        position: relative;
+        z-index: 1;
 
-            color: white;
-            overflow: hidden;
+        width: 100%;
+        height: 100%;
 
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(93, 76, 255, 0.35),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 80% 80%,
-                    rgba(0, 210, 255, 0.25),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #080914 0%,
-                    #10132b 45%,
-                    #090b18 100%
-                );
-        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        /* Ambient background glow */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: -50%;
-            pointer-events: none;
+        padding: 24px;
+    }
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(255, 255, 255, 0.045) 0,
-                    transparent 40%
-                );
+    .card {
+        width: min(1100px, 100%);
 
-            animation: ambient 15s ease-in-out infinite alternate;
-        }
+        padding: 55px 50px;
 
-        @keyframes ambient {
-            from {
-                transform: translate(-3%, -2%) scale(1);
-            }
+        text-align: center;
 
-            to {
-                transform: translate(3%, 2%) scale(1.08);
-            }
-        }
+        background: rgba(12, 14, 32, 0.68);
 
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        border-radius: 32px;
+
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+
+        box-shadow:
+            0 30px 100px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .label {
+        display: inline-block;
+
+        margin-bottom: 18px;
+        padding: 8px 16px;
+
+        border-radius: 999px;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        letter-spacing: 2px;
+        text-transform: uppercase;
+
+        color: rgba(255, 255, 255, 0.7);
+
+        background: rgba(255, 255, 255, 0.06);
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    h1 {
+        font-size: clamp(40px, 7vw, 82px);
+
+        line-height: 1;
+
+        letter-spacing: -4px;
+
+        margin-bottom: 18px;
+
+        background:
+            linear-gradient(
+                120deg,
+                #ffffff,
+                #cbd2ff 45%,
+                #8cecff
+            );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+    }
+
+    .target {
+        color: rgba(255, 255, 255, 0.5);
+
+        font-size: clamp(14px, 2vw, 18px);
+
+        margin-bottom: 42px;
+    }
+
+    .countdown {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 16px;
+    }
+
+    .unit {
+        min-width: 0;
+
+        padding: 25px 12px;
+
+        border-radius: 22px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.075),
+                rgba(255, 255, 255, 0.025)
+            );
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease;
+    }
+
+    .unit:hover {
+        transform: translateY(-5px);
+
+        background:
+            rgba(255, 255, 255, 0.09);
+    }
+
+    .number {
+        display: block;
+
+        font-variant-numeric: tabular-nums;
+
+        font-size: clamp(34px, 6vw, 64px);
+
+        font-weight: 750;
+
+        line-height: 1;
+
+        letter-spacing: -2px;
+    }
+
+    .name {
+        display: block;
+
+        margin-top: 10px;
+
+        color: rgba(255, 255, 255, 0.4);
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        letter-spacing: 1.5px;
+
+        text-transform: uppercase;
+    }
+
+    /* Intense millisecond display */
+
+    .milliseconds {
+        margin-top: 22px;
+
+        font-family:
+            "SFMono-Regular",
+            Consolas,
+            "Liberation Mono",
+            monospace;
+
+        font-size: clamp(18px, 3vw, 30px);
+
+        font-weight: 700;
+
+        letter-spacing: 3px;
+
+        color: rgba(140, 236, 255, 0.8);
+
+        text-shadow:
+            0 0 10px rgba(80, 220, 255, 0.35);
+
+        font-variant-numeric: tabular-nums;
+    }
+
+    .milliseconds span {
+        opacity: 0.45;
+    }
+
+    .footer {
+        margin-top: 32px;
+
+        color: rgba(255, 255, 255, 0.25);
+
+        font-size: 12px;
+    }
+
+    @media (max-width: 650px) {
         .page {
-            position: relative;
-            z-index: 1;
-
-            width: 100%;
-            height: 100%;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 24px;
+            padding: 14px;
         }
 
         .card {
-            width: min(1000px, 100%);
+            padding: 42px 16px;
 
-            padding: 60px 50px;
-
-            text-align: center;
-
-            background: rgba(15, 17, 38, 0.62);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 32px;
-
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-
-            box-shadow:
-                0 30px 100px rgba(0, 0, 0, 0.45),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        }
-
-        .label {
-            display: inline-block;
-
-            margin-bottom: 18px;
-            padding: 8px 16px;
-
-            border-radius: 999px;
-
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-
-            color: rgba(255, 255, 255, 0.7);
-
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
         }
 
         h1 {
-            font-size: clamp(40px, 7vw, 82px);
-            line-height: 1;
-
-            letter-spacing: -3px;
-
-            margin-bottom: 18px;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    #ffffff,
-                    #cbd2ff 45%,
-                    #91eaff
-                );
-
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .target {
-            color: rgba(255, 255, 255, 0.55);
-            font-size: clamp(14px, 2vw, 18px);
-            margin-bottom: 48px;
-        }
-
-        .countdown {
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
-            gap: 18px;
-        }
-
-        .unit {
-            min-width: 0;
-
-            padding: 25px 15px;
-
-            border-radius: 22px;
-
-            background: rgba(255, 255, 255, 0.055);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.035);
-
-            transition:
-                transform 0.25s ease,
-                background 0.25s ease;
-        }
-
-        .unit:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .number {
-            display: block;
-
-            font-variant-numeric: tabular-nums;
-
-            font-size: clamp(35px, 6vw, 64px);
-            font-weight: 700;
-            line-height: 1;
-
             letter-spacing: -2px;
         }
 
+        .target {
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            gap: 7px;
+        }
+
+        .unit {
+            padding: 20px 5px;
+
+            border-radius: 16px;
+        }
+
+        .number {
+            font-size: clamp(27px, 9vw, 45px);
+        }
+
         .name {
-            display: block;
+            font-size: 9px;
 
-            margin-top: 10px;
-
-            color: rgba(255, 255, 255, 0.45);
-
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .footer {
-            margin-top: 38px;
-
-            color: rgba(255, 255, 255, 0.3);
-
-            font-size: 12px;
+        .milliseconds {
+            letter-spacing: 2px;
         }
+    }
+</style>
+```
 
-        @media (max-width: 650px) {
-            .page {
-                padding: 14px;
-            }
-
-            .card {
-                padding: 42px 20px;
-                border-radius: 24px;
-            }
-
-            h1 {
-                letter-spacing: -2px;
-            }
-
-            .target {
-                margin-bottom: 32px;
-            }
-
-            .countdown {
-                gap: 8px;
-            }
-
-            .unit {
-                padding: 20px 8px;
-                border-radius: 16px;
-            }
-
-            .number {
-                font-size: clamp(28px, 9vw, 45px);
-            }
-
-            .name {
-                font-size: 9px;
-                letter-spacing: 1px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .card {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
-
-            .countdown {
-                gap: 5px;
-            }
-
-            .unit {
-                padding-left: 4px;
-                padding-right: 4px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <main class="page">
-        <section class="card">
+<main class="page">
 
-            <div class="label">O/Ls Countdown</div>
+```
+<section class="card">
 
-            <h1>Countdown for O/Ls</h1>
+    <div class="label">
+        O/Ls Countdown
+    </div>
 
-            <div class="target">
-                December 6th, 2026 · 23:59:59
-            </div>
+    <h1>
+        Countdown for O/Ls
+    </h1>
 
-            <div class="countdown">
+    <div class="target">
+        December 6th, 2026 · 23:59:59
+    </div>
 
-                <div class="unit">
-                    <span class="number" id="days">0</span>
-                    <span class="name">Days</span>
-                </div>
+    <div class="countdown">
 
-                <div class="unit">
-                    <span class="number" id="hours">00</span>
-                    <span class="name">Hours</span>
-                </div>
+        <div class="unit">
+            <span class="number" id="days">0</span>
+            <span class="name">Days</span>
+        </div>
 
-                <div class="unit">
-                    <span class="number" id="minutes">00</span>
-                    <span class="name">Minutes</span>
-                </div>
+        <div class="unit">
+            <span class="number" id="hours">00</span>
+            <span class="name">Hours</span>
+        </div>
 
-                <div class="unit">
-                    <span class="number" id="seconds">00</span>
-                    <span class="name">Seconds</span>
-                </div>
+        <div class="unit">
+            <span class="number" id="minutes">00</span>
+            <span class="name">Minutes</span>
+        </div>
 
-            </div>
+        <div class="unit">
+            <span class="number" id="seconds">00</span>
+            <span class="name">Seconds</span>
+        </div>
 
-            <div class="footer">
-                Every second counts.
-            </div>
+    </div>
 
-        </section>
-    </main>
+    <div class="milliseconds">
+        .<span id="milliseconds">000</span>
+    </div>
 
-    <script>
-        /*
-         * December 6th, 2026 at 23:59:59
-         *
-         * The date is interpreted using the visitor's local timezone.
-         */
-        const targetDate = new Date(
-            "2026-12-06T23:59:59"
-        ).getTime();
+    <div class="footer">
+        Every second counts.
+    </div>
 
-        const daysElement = document.getElementById("days");
-        const hoursElement = document.getElementById("hours");
-        const minutesElement = document.getElementById("minutes");
-        const secondsElement = document.getElementById("seconds");
+</section>
+```
 
-        function pad(number) {
-            return String(number).padStart(2, "0");
+</main>
+
+<script>
+    /*
+     * Target:
+     * December 6th, 2026 at 23:59:59
+     *
+     * Uses the visitor's local timezone.
+     */
+    const targetDate =
+        new Date("2026-12-06T23:59:59").getTime();
+
+    const daysElement =
+        document.getElementById("days");
+
+    const hoursElement =
+        document.getElementById("hours");
+
+    const minutesElement =
+        document.getElementById("minutes");
+
+    const secondsElement =
+        document.getElementById("seconds");
+
+    const millisecondsElement =
+        document.getElementById("milliseconds");
+
+
+    function pad(number, length = 2) {
+        return String(number).padStart(length, "0");
+    }
+
+
+    /*
+     * Calculates calendar-style months remaining.
+     *
+     * Example:
+     * September -> October = 1 month
+     */
+    function getMonthDifference(from, to) {
+        let months =
+            (to.getFullYear() - from.getFullYear()) * 12;
+
+        months +=
+            to.getMonth() - from.getMonth();
+
+        if (to.getDate() < from.getDate()) {
+            months--;
         }
 
-        function updateCountdown() {
-            const now = Date.now();
-            const difference = targetDate - now;
+        return Math.max(0, months);
+    }
 
-            if (difference <= 0) {
-                daysElement.textContent = "0";
-                hoursElement.textContent = "00";
-                minutesElement.textContent = "00";
-                secondsElement.textContent = "00";
 
-                document.querySelector(".target").textContent =
-                    "December 6th, 2026 · 23:59:59 — Time's up!";
+    function updateCountdown() {
 
-                return;
-            }
+        const now = new Date();
 
-            const totalSeconds = Math.floor(difference / 1000);
+        const currentTime =
+            now.getTime();
 
-            const days = Math.floor(
+        const difference =
+            targetDate - currentTime;
+
+
+        if (difference <= 0) {
+
+            daysElement.textContent = "0";
+            hoursElement.textContent = "00";
+            minutesElement.textContent = "00";
+            secondsElement.textContent = "00";
+            millisecondsElement.textContent = "000";
+
+            document.querySelector(".target").textContent =
+                "December 6th, 2026 · 23:59:59 — TIME'S UP";
+
+            return;
+        }
+
+
+        /*
+         * Main countdown
+         */
+
+        const totalMilliseconds =
+            difference;
+
+        const totalSeconds =
+            Math.floor(totalMilliseconds / 1000);
+
+
+        const days =
+            Math.floor(
                 totalSeconds / 86400
             );
 
-            const hours = Math.floor(
+
+        const hours =
+            Math.floor(
                 (totalSeconds % 86400) / 3600
             );
 
-            const minutes = Math.floor(
+
+        const minutes =
+            Math.floor(
                 (totalSeconds % 3600) / 60
             );
 
-            const seconds = totalSeconds % 60;
 
-            daysElement.textContent = days;
-            hoursElement.textContent = pad(hours);
-            minutesElement.textContent = pad(minutes);
-            secondsElement.textContent = pad(seconds);
+        const seconds =
+            totalSeconds % 60;
 
-            /*
-             * Update the social/meta description too.
-             * This changes the page metadata while it is open,
-             * although social platforms normally cache previews.
-             */
-            const description =
-                `${days} days, ${pad(hours)} hours, ` +
-                `${pad(minutes)} minutes and ${pad(seconds)} seconds ` +
-                `remaining until December 6th, 2026 at 23:59:59.`;
 
-            document
-                .querySelector('meta[name="description"]')
-                .setAttribute("content", description);
+        /*
+         * True remaining milliseconds.
+         */
+        const milliseconds =
+            totalMilliseconds % 1000;
 
-            document
-                .querySelector('meta[property="og:description"]')
-                .setAttribute("content", description);
 
-            document
-                .querySelector('meta[name="twitter:description"]')
-                .setAttribute("content", description);
+        daysElement.textContent =
+            days;
+
+
+        hoursElement.textContent =
+            pad(hours);
+
+
+        minutesElement.textContent =
+            pad(minutes);
+
+
+        secondsElement.textContent =
+            pad(seconds);
+
+
+        millisecondsElement.textContent =
+            pad(milliseconds, 3);
+
+
+        /*
+         * Dynamic meta description
+         */
+
+        const target =
+            new Date(targetDate);
+
+
+        const months =
+            getMonthDifference(
+                now,
+                target
+            );
+
+
+        /*
+         * Calculate calendar remainder
+         * after complete months.
+         */
+        const afterMonths =
+            new Date(now);
+
+
+        afterMonths.setMonth(
+            afterMonths.getMonth() + months
+        );
+
+
+        let remainingHours =
+            Math.floor(
+                (targetDate - afterMonths.getTime()) /
+                3600000
+            );
+
+
+        /*
+         * Keep the preview readable.
+         */
+        remainingHours =
+            Math.max(0, remainingHours);
+
+
+        const metaText =
+            `${months} Months, ` +
+            `${days} Days, ` +
+            `${remainingHours} Hours left ` +
+            `until December 6th, 2026 at 23:59:59.`;
+
+
+        document
+            .querySelector('meta[name="description"]')
+            .setAttribute(
+                "content",
+                metaText
+            );
+
+
+        document
+            .querySelector('meta[property="og:description"]')
+            .setAttribute(
+                "content",
+                metaText
+            );
+
+
+        document
+            .querySelector('meta[name="twitter:description"]')
+            .setAttribute(
+                "content",
+                metaText
+            );
+    }
+
+
+    /*
+     * Run immediately.
+     */
+    updateCountdown();
+
+
+    /*
+     * Update the normal countdown every second.
+     */
+    setInterval(
+        updateCountdown,
+        1000
+    );
+
+
+    /*
+     * Milliseconds need much faster updates.
+     *
+     * requestAnimationFrame keeps this visually
+     * smooth without forcing a heavy 1ms interval.
+     */
+    function updateMilliseconds() {
+
+        const difference =
+            targetDate - Date.now();
+
+
+        if (difference <= 0) {
+            millisecondsElement.textContent = "000";
+            return;
         }
 
-        updateCountdown();
 
-        // Update once every second.
-        setInterval(updateCountdown, 1000);
-    </script>
+        const milliseconds =
+            difference % 1000;
+
+
+        millisecondsElement.textContent =
+            pad(milliseconds, 3);
+
+
+        requestAnimationFrame(
+            updateMilliseconds
+        );
+    }
+
+
+    requestAnimationFrame(
+        updateMilliseconds
+    );
+</script>
 
 </body>
 </html>
